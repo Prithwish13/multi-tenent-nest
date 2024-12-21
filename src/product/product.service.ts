@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { PROVIDER } from 'src/constants/providers';
 import { Product } from './product.schema';
 import { Tenant } from 'src/tenant/tenant.schema';
+import { AddProductDto } from './dtos/addProduct.dto';
 
 @Injectable()
 export class ProductService {
@@ -15,7 +16,7 @@ export class ProductService {
     return await this.productModel.find().exec();
   }
 
-  async addProduct(product: Product) {
+  async addProduct(product: AddProductDto) {
     return await this.productModel.create(product);
   }
 }
