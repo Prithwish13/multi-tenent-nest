@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { PROVIDER } from 'src/constants/providers';
 import { Product } from './product.schema';
 import { Tenant } from 'src/tenant/tenant.schema';
@@ -18,5 +18,9 @@ export class ProductService {
 
   async addProduct(product: AddProductDto) {
     return await this.productModel.create(product);
+  }
+
+  async getProductById(productId: Types.ObjectId) {
+    return await this.productModel.findById(productId);
   }
 }
