@@ -37,11 +37,7 @@ export class ProductController {
   @Get(':id')
   async getProductDetails(@Param() mongoIdDto: MongoIdDto) {
     const productId = mongoIdDto.id;
-    try {
-      return await this.productService.getProductById(productId);
-    } catch (error) {
-      throw new InternalServerErrorException(error.message);
-    }
+    return await this.productService.getProductById(productId);
   }
 
   @Post()

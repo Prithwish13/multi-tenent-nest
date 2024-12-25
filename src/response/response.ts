@@ -8,10 +8,12 @@ export enum StatusCode {
 export class MessageResponse {
   readonly statusCode: StatusCode;
   readonly message: string;
+  readonly error: boolean;
 
   constructor(statusCode: StatusCode, message: string) {
     this.statusCode = statusCode;
     this.message = message;
+    this.error = false;
   }
 }
 
