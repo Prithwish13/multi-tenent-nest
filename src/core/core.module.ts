@@ -1,8 +1,9 @@
-import { Module, ValidationPipe } from '@nestjs/common';
+import { Global, Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ResponseTransformer } from 'src/response/response.interceptor';
 
+@Global()
 @Module({
   imports: [ConfigModule],
   providers: [

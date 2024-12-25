@@ -5,6 +5,7 @@ import {
   Get,
   HttpException,
   HttpStatus,
+  InternalServerErrorException,
   Param,
   // ParseIntPipe,
   Post,
@@ -29,10 +30,7 @@ export class ProductController {
     try {
       return await this.productService.getProducts();
     } catch (error) {
-      throw new HttpException(
-        error.message,
-        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new InternalServerErrorException(error.message);
     }
   }
 
@@ -42,10 +40,7 @@ export class ProductController {
     try {
       return await this.productService.getProductById(productId);
     } catch (error) {
-      throw new HttpException(
-        error.message,
-        error.status || HttpStatus.INTERNAL_SERVER_ERROR,
-      );
+      throw new InternalServerErrorException(error.message);
     }
   }
 

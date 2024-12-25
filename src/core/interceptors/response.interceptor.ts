@@ -10,7 +10,6 @@ import { DataResponse, MessageResponse, StatusCode } from '../http/response';
 @Injectable()
 export class ResponseTransformer implements NestInterceptor {
   intercept(_: ExecutionContext, next: CallHandler): Observable<any> {
-    console.log(next.handle());
     return next.handle().pipe(
       map((data) => {
         console.log(data);
