@@ -6,10 +6,13 @@ import {
 } from '@nestjs/common';
 import { Observable, map } from 'rxjs';
 import { DataResponse, MessageResponse, StatusCode } from './response';
+import { Request } from 'express';
 
 @Injectable()
 export class ResponseTransformer implements NestInterceptor {
-  intercept(_: ExecutionContext, next: CallHandler): Observable<any> {
+  intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+    const request = context.switchToHttp().getRequest<Request>();
+    console.log(request.headers);
     return next.handle().pipe(
       map((data) => {
         if (data instanceof MessageResponse) return data;

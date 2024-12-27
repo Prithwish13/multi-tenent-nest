@@ -8,6 +8,8 @@ import { ProductModule } from './product/product.module';
 import { TenantModule } from './tenant/tenant.module';
 import { CoreModule } from './core/core.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
+import mainConfiguration from 'src/config/main.config';
+// import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -15,11 +17,13 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
       isGlobal: true,
       envFilePath: '.env',
       cache: true,
+      load: [mainConfiguration],
     }),
     MongooseModule.forRootAsync(mongooseModuleAsyncOptions),
     ProductModule,
     TenantModule,
     CoreModule,
+    // AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],
