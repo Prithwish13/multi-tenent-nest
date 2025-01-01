@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { HydratedDocument, Types } from 'mongoose';
-import { Role } from '../../auth/schemas/role.schema';
+import { Tenant } from 'src/tenant/tenant.schema';
 
 export type MessageDocument = HydratedDocument<User>;
 
@@ -10,9 +10,6 @@ export class User {
 
   @Prop({ trim: true, maxlength: 200 })
   name?: string;
-
-  @Prop({ select: false, trim: true, maxlength: 200 })
-  deviceId?: string;
 
   @Prop({ unique: true, required: true, trim: true, select: false })
   email: string;
@@ -26,35 +23,8 @@ export class User {
   })
   password?: string;
 
-  @Prop({ select: false, trim: true, maxlength: 2000 })
-  firebaseToken?: string;
-
-  @Prop({ select: false, trim: true, maxlength: 200 })
-  googleId?: string;
-
-  @Prop({ select: false, trim: true, maxlength: 200 })
-  facebookId?: string;
-
-  @Prop({ trim: true, maxlength: 500 })
-  profilePicUrl?: string;
-
-  @Prop({ trim: true, maxlength: 500 })
-  googleProfilePicUrl?: string;
-
-  @Prop({ trim: true, maxlength: 500 })
-  facebookProfilePicUrl?: string;
-
-  @Prop({ trim: true, maxlength: 500 })
-  tagline?: string;
-
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Role.name }] })
-  roles: Role[];
-
-  @Prop({ default: false })
-  verified: boolean;
-
-  @Prop({ default: true })
-  readonly status: boolean;
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: Tenant.name })
+  _tenant: Tenant;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

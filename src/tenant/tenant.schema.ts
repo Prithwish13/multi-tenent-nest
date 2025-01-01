@@ -1,7 +1,7 @@
 import { Prop, SchemaFactory, Schema } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-@Schema({ timestamps: true })
+@Schema({ timestamps: true, versionKey: false })
 export class Tenant extends Document {
   @Prop({ required: true })
   tenant_id: string;

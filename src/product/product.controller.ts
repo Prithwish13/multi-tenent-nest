@@ -15,11 +15,13 @@ import { ProductService } from './product.service';
 import { AddProductDto } from './dtos/addProduct.dto';
 import { PaginationDto } from 'src/common/pagination.dto';
 import { MongoIdDto } from 'src/common/mongoid.dto';
+import { CacheTTL } from '@nestjs/cache-manager';
 
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
+  @CacheTTL(60 * 1000)
   @Get()
   async getProducts(
     // @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,

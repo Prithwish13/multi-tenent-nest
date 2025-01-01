@@ -9,7 +9,10 @@ import { TenantModule } from './tenant/tenant.module';
 import { CoreModule } from './core/core.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import mainConfiguration from 'src/config/main.config';
+import { CacheModule } from '@nestjs/cache-manager';
+import { redisStore } from 'cache-manager-redis-yet';
 // import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -24,6 +27,12 @@ import mainConfiguration from 'src/config/main.config';
     TenantModule,
     CoreModule,
     // AuthModule,
+    CacheModule.register({
+      isGlobal: true,
+      ttl: 30 * 1000,
+      store: redisStore,
+    }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],
